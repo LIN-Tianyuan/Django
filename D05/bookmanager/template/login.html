@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    {# import axois #}
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    {# vue's beard syntax conflicts with django/flask's template syntax #}
+    <a href="#">[[message]]</a>
+    <button @click="login">Login</button>
+    <hr>
+    [[ username ]]
+    <hr>
+    <button @click="login2">post</button>
+</div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            message: 'Coupon Collection',
+            username: ''
+        },
+        methods: {
+            login: function(){
+                {# Send axois request here #}
+                var url = 'http://127.0.0.1:8000/rece/?username=alex&password=1234'
+                axios.get(url).then((response)=>{
+                    console.log(response.data.info.username)
+                    this.username = response.data.info.username
+                }).catch((error) => {
+                    console.log(error)
+                })
+            },
+            login2: function(){
+                let url = 'http://127.0.0.1:8000/rece/'
+                axios.post(url, {
+                    'username': 'luna',
+                    'password': '123456'
+                }).then((response) => {
+                    console.log(response.data.info.username)
+                    this.username = response.data.info.username
+                }).catch((error) => {
+
+                })
+            }
+        }
+    })
+</script>
+</html>
+

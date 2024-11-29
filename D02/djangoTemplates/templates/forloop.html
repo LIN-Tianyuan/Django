@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For</title>
+    <style>
+        .primary {
+            background: #fff;
+        }
+        .second {
+            background: #ccc;
+        }
+        .third {
+            background: #0f0;
+        }
+    </style>
+</head>
+<body>
+<h1>for</h1>
+<table width="900" cellpadding="10" cellspacing="0" border="1">
+    <tr>
+        <td>序号</td>
+        <td>书名</td>
+        <td>价格</td>
+        <td>出版社</td>
+        <td>分类</td>
+    </tr>
+    {% for book in books %}
+    <tr class="{% cycle 'primary' 'second' 'third' %}">
+        <td>{{forloop.counter}}</td>
+        <td>{{book.bookname}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.publishing}}</td>
+        <td>{{book.category}}</td>
+        <td>
+            <a href="/book/get/{{ book.id }}">Modify</a>
+            &nbsp;&nbsp;
+            <a href="/book/delete/{{ book.id }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<h1>Empty list</h1>
+<table width="900" cellpadding="10" cellspacing="0" border="1">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+    </tr>
+    {% for item in students %}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">Sorry, the list is empty</td>
+    </tr>
+    {% endfor %}
+</table>
+{% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<form action="" method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>Username</td>
+      <td><input type="text" name="username"></td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><input type="password" name="password"></td>
+    </tr>
+    <tr>
+      <td>Confirm password</td>
+      <td><input type="password" name="password2"></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>
+        <input type="radio" name="gender" value="1">Male
+        <input type="radio" name="gender" value="2">Female
+        <input type="radio" name="gender" value="3" checked>Secret
+      </td>
+    </tr>
+    <tr>
+      <td>Hobbies</td>
+      <td>
+        <input type="checkbox" name="love" value="1">Basketball
+        <input type="checkbox" name="love" value="2">Pingpong
+        <input type="checkbox" name="love" value="3">Badminton
+        <input type="checkbox" name="love" value="4">Football
+        <input type="checkbox" name="love" value="5">Rugby
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="OK">
+      </td>
+    </tr>
+    <td>Province</td>
+    <td>
+      <select name="provinces" multiple>
+        <option value="1">Beijing</option>
+        <option value="2">Shanghai</option>
+        <option value="3">Tianjin</option>
+        <option value="4">Hebei</option>
+        <option value="5">Henan</option>
+      </select>
+    </td>
+  </table>
+</form>
+</body>
+</html>

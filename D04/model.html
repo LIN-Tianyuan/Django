@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <hr>
+        <table>
+            <tr>
+                <td>Username</td> 
+                <td><input type="text" name="username" v-model="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td> 
+                <td><input type="password" name="password1" v-model="password1"></td>
+            </tr>
+            <tr>
+                <td>Confirm password</td> 
+                <td><input type="password" name="password2" v-model="password2"></td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td>Female <input type="radio" name="sex" value="girl" v-model="sex"></td>
+                <td>Male <input type="radio" name="sex" value="boy" v-model="sex"></td>
+            </tr>
+            <tr><td>Hobby</td>
+                <td>
+                  Football <input type="checkbox" name="like" value="football" v-model="like"> 
+                  Basketball <input type="checkbox" name="like" value="basketball" v-model="like">
+                  Ping pong<input type="checkbox" name="like" value="pingpong" v-model="like"> 
+                </td>
+              </tr>
+        </table>
+        <button v-on:click="register">Register</button>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Coupon Collection',
+            username: '',
+            password1: '',
+            password2: '',
+            sex: '',
+            like: []
+        },
+        methods: {
+            register: function() {
+                alert(this.username + this.password1 + this.password2 + this.sex + this.like)
+            }
+        }
+    })
+</script>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1. Import Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <!-- 2. Defining a tag Need to add an id to a tag  -->
+    <div id="app">
+        <span>{{message}}</span>
+        <hr>
+        <a href="#" v-if="isLogin">Welcome back.</a>
+        <hr>
+        <a href="#" v-if="level === 1">Bronze</a>
+        <a href="#" v-else-if="level === 2">Platinum</a>
+        <a href="#" v-else>King</a>
+        <hr>
+        <span v-if="seen">v-if</span>
+        <br>
+        <span v-show="seen">v-show</span>
+    </div>
+</body>
+    <!-- 3. Creating a Vue Instance -->
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello',
+            isLogin: true,
+            level: 1,
+            seen: false
+        }
+    })
+</script>
+</html>

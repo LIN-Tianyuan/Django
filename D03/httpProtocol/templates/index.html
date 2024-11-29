@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Static</title>
+    <link rel="stylesheet" href="{% static 'styles/common.css' %}">
+    <style>
+        .logo2 {
+            width:380px;
+            height:240px;
+            background:url({% static 'images/logo.png' %});
+        }
+    </style>
+</head>
+<body>
+<p><a href="/users">User model</a></p>
+<p><a href="/redirect">Go to Baidu</a></p>
+<p><a href="/register">User register</a></p>
+<p><a href="/link?username=tom&age=22">Passing parameters via links</a></p>
+    <p><a href="/search">Search</a></p>
+    <div class="logo2"></div>
+    <div class="logo"></div>
+    <h1>Hello</h1>
+    <p><img src="{% static 'images/ai.jpeg' %}" alt=""></p>
+    {% for product in products %}
+    <p>{{product.name}}</p>
+    <p>{{product.price}}</p>
+    <p><img src="{% static 'images/'|add:product.image %}" alt=""></p>
+    {% endfor %}
+</body>
+</html>

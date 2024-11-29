@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <hr>
+        <ul>
+            <li v-for="(item,index) in items">
+                {{index + 1}} -- {{item}}
+            </li>
+        </ul>
+        <hr>
+        <!-- Iterating over objects -->
+        <ul>
+            <li v-for="(value, key) in object">{{key}} - {{value}}</li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="todo in todos">{{todo.title}} ---- {{todo.author}}</li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Coupon Collection',
+            items: ['python', 'mysql', 'linux', 'html', 'js', 'css'],
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            },
+            todos: [
+            {
+                title: 'Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            },
+            {
+                title: 'python',
+                author: 'Ricky',
+                publishedAt: '2019-04-10'
+            },
+            {
+                title: 'alex',
+                author: 'alex',
+                publishedAt: '2024-01-01'
+            }
+            ]
+        }
+    })
+</script>
+</html>
+

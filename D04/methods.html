@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <button v-on:click="login">Login</button>
+        <br>
+        <a href="javascript:;" @click="register">Register</a>
+        <hr>
+        <button @click="add(counter)">Click plus 1</button>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Coupon Collection',
+            counter: 1,
+            total: 0
+        },
+        methods: {
+            login: function(){
+                alert("I've been clicked.")
+            },
+            register: function(){
+                alert('Register')
+            },
+            add: function(counter){
+                // this represents the current Vue, get the variables in data via this.total
+                this.total += counter
+                alert(this.total)
+            }
+        }
+    })
+</script>
+</html>
+

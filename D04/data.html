@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <a href="#">{{message}}</a>
+        <span>{{hello}}</span>
+        <hr>
+        <hr>
+        <a v-bind:href="url">Poke me for a surprise</a>
+        <br>
+        <span :title="showmessage">Mouse over here.</span>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Coupon Collection',
+            hello: 'hi en heng',
+            url: "http://www.baidu.com",
+            showmessage: 'The current time is:' + new Date().toLocaleString()
+        }
+    })
+</script>
+</html>
+

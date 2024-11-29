@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <input type="text" name="todoitem" v-model="newitem"> <button @click="add">Add</button>
+        <hr>
+        <ul>
+            <li v-for="(item, index) in items">
+                <a href="javascript:;" @click="up(index)">↑</a>
+                {{item}} 
+                <a href="javascript:;" @click="deleteitem(index)">Delete</a>
+                <a href="javascript:;" @click="down(index)">↓</a>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: "Hello",
+            items: ["Learn html", "Learn python", "Learn java"],
+            newitem: ''
+        },
+        methods: {
+            add: function() {
+                this.items.push(this.newitem)
+                this.newitem = ''
+            },
+            deleteitem: function(index) {
+                this.items.splice(index, 1)
+            },
+            up: function(index) {
+                // 1. Get the current element
+                current = this.items[index]
+                // 2. Remove the current element first
+                this.items.splice(index, 1)
+                // 3. Add it again, and when you add it, make it indexed -1
+                this.items.splice(index-1, 0, current)
+            },
+            down: function(index) {
+                // 1. Get the current element
+                current = this.items[index]
+                // 2. Remove the current element first
+                this.items.splice(index, 1)
+                // 3. Add it again, and when you add it, make it indexed +1
+                this.items.splice(index+1, 0, current)
+            }
+        }
+    })
+</script>
+</html>

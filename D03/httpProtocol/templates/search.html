@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<form action="" method="get">
+  <table>
+    <tr>
+      <td>Keyword: </td>
+      <td><input type="text" name="keywords"></td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td>
+        <select name="category" id="">
+          <option value="china">National news</option>
+          <option value="world">World news</option>
+          <option value="sport">Sport news</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="ok"></td>
+    </tr>
+  </table>
+  {% if keywords %}
+  <div>
+    <p>Keywords searched: {{ keywords }}</p>
+    <p>The search type is: {{ category }}</p>
+  </div>
+  {% endif %}
+</form>
+</body>
+</html>

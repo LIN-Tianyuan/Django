@@ -84,12 +84,12 @@ pip list
 ```bash
 cd ~/Desktop/Code
 django-admin startproject bookmanager
-python manage.py runserver
+python3 manage.py runserver
 ```
  - Create Sub-Applications
 ```bash
 cd ~/Desktop/Code/bookmanager
-python manage.py startapp book
+python3 manage.py startapp book
 ```
  - Register/install the sub-application
 ```python
@@ -104,4 +104,130 @@ INSTALLED_APPS = [
     # Add sub app
     'book.apps.BookConfig'
 ]
+```
+### 1.4 Model
+ - Define the model class
+```python
+# book/models.py
+from django.db import models
+
+# Model class for book list information
+class BookInfo(models.Model):
+    # Create fields, field types...
+    name = models.CharField(max_length=10)
+
+# Model class for character list information
+class PeopleInfo(models.Model):
+    name = models.CharField(max_length=10)
+    gender = models.BooleanField()
+    # Foreign key constraint: which book the character belongs to
+    book = models.ForeignKey(BookInfo)
+```
+ - Model migration (table construction)
+```bash
+# Generate migration files: generate statements to create tables based on model classes
+python3 manage.py makemigrations
+# Perform migration: create tables in the database based on the statements generated in the first step
+python3 manage.py migrate
+```
+
+### 1.5 Site Management
+ - Create manager
+```bash
+python3 manage.py createsuperuser
+```
+ - Register Model Classes
+```python
+# book/admin.py
+admin.site.register(BookInfo)
+admin.site.register(PeopleInfo)
+```
+ - Optimize model class presentation
+```python
+class BookInfo(models.Model):
+    name = models.CharField(max_length=10)
+
+    def __str__(self):
+        """Output the model class as a string"""
+        return self.name
+```
+### 1.6 Views and URLs
+ - Define the view
+```python
+# book/views.py
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('OK!')
+```
+ - Configure URLconf
+```python
+# settings.py
+ROOT_URLCONF = 'bookmanager.urls'
+```
+```python
+# bookmanager/urls.py
+from django.conf.urls import url
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    url(r'^', include('book.urls'))
+    # new version: path 
+]
+```
+```python
+# book/urls.py
+from book.views import index
+urlpatterns = [
+    url(r'^$', index)
+]
+```
+### 1.7 Template
+ - Create a template
+```html
+<!-- templates/index.html-->
+...
+```
+ - Setting the template lookup path
+```python
+# settings.py
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+ - Template receives incoming data from the view
+```python
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'index.html')
+```
+ - Template processing data
+```html
+<!-- templates/index.html-->
+... <div>{{title}}</div>
+```
+### 1.8 Configuration and static files
+ - settings.py
+```python
+# The root directory of the current project, which Django will rely on to locate relevant files within the project. We can also use this parameter to construct file paths.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+STATIC_URL = '/static/' # URL prefix for accessing static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static') 
+]   # Directory for finding static files 
 ```

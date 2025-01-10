@@ -516,3 +516,110 @@ page_skus = paginator.page(1)
 # Get Pagination Data
 total_page=paginator.num_pages
 ```
+## 3. View
+ - Route naming and reverse inverse parsing
+```python
+url(r'^',include('book.urls',namespace='book'))
+
+urlpatterns = [
+   url(r'^$',index),
+   # Match the URL of the book list information, call the corresponding bookList view.
+   url(r'^booklist/$',bookList,name='index'),
+   url(r'^testproject/$',views.testproject,name='test'),
+]
+```
+```python
+from django.core.urlresolvers import reverse
+
+from django.urls import reverse
+
+def testproject(request):
+
+    return HttpResponse("OK")
+
+# Define View: Provides information about the list of books
+def bookList(request):
+
+    url = reverse('book:test')
+    print(url)
+    return HttpResponse('index')
+
+"""
+For unspecified namespace, reverse(route name)
+reverse(namespace namespace:route name) for specified namespaces
+"""
+```
+ - HttpRequest
+1. path parameter
+
+position parameter
+```python
+# URL path parameters
+url(r'^(\d+)/(\d+)/$', views.index),
+
+def index(request, value1, value2):
+   context = {'v1':value1, 'v2':value2}
+   return render(request, 'Book/index.html', context)
+```
+keyword parameter
+```python
+url(r'^(?P<value1>\d+)/(?P<value2>\d+)/$', views.index),
+
+def index(request, value2, value1):
+   context = {'v1':value1, 'v2':value2}
+   return render(request, 'Book/index.html', context)
+```
+2. Query String
+```python
+# /get/?a=1&b=2&a=3
+
+def get(request):
+    a = request.GET.get('a')
+    b = request.GET.get('b')
+    alist = request.GET.getlist('a')
+    print(a)  # 3
+    print(b)  # 2
+    print(alist)  # ['1', '3']
+    return HttpResponse('OK')
+```
+3. Body
+
+Form Data
+```python
+def post(request):
+    a = request.POST.get('a')
+    b = request.POST.get('b')
+    alist = request.POST.getlist('a')
+    print(a)
+    print(b)
+    print(alist)
+    return HttpResponse('OK')
+```
+
+Non-Form Data
+```python
+# {"a": 1, "b": 2}
+import json
+
+def post_json(request):
+    json_str = request.body
+    json_str = json_str.decode()  # python3.6 无需执行此步
+    req_data = json.loads(json_str)
+    print(req_data['a'])
+    print(req_data['b'])
+    return HttpResponse('OK')
+```
+4. Header
+```python
+def get_headers(request):
+    print(request.META['CONTENT_TYPE'])
+    return HttpResponse('OK')
+```
+5. Other
+```text
+method：'GET'、'POST'...
+user
+path
+encoding
+FILES
+```
